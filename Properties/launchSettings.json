@@ -1,0 +1,25 @@
+{
+  "profiles": {
+    
+    "Client | STG": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DOCUMOTO_API_ENDPOINT": "https://integration.digabit.com/dws/services/PublishingService20.PublishingService20HttpSoap12Endpoint/",
+        "DOCUMOTO_API_KEY": "",
+        "DOCUMOTO_SUPPLIER_CODE": "",
+        "DOCUMOTO_USER_NAME": ""
+      }
+    },
+
+    "Client | PRD": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "DOCUMOTO_API_ENDPOINT": "https://documoto.digabit.com/dws/services/PublishingService20.PublishingService20HttpSoap12Endpoint/",
+        "DOCUMOTO_API_KEY": "",
+        "DOCUMOTO_SUPPLIER_CODE": "",
+        "DOCUMOTO_USER_NAME": ""
+      }
+    }
+
+  }
+}
