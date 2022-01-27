@@ -18,7 +18,7 @@ They include a port (`8080`) and specify `http`.*
 
 ### Launch Profiles
 
-A Staging ("Integration" in Documoto) and Production launch profiles are provided.
+Both Staging ("Integration" in Documoto) and Production launch profiles are provided.
 Environment variables may be maintained therein, set on the machine, and/or provided via the Command Line.
 
 ## Connected Service
