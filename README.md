@@ -13,7 +13,8 @@ The following environment variables are required for execution:
 | DOCUMOTO_SUPPLIER_CODE | Supplier Code | At least one must be defined in Documoto |
 | DOCUMOTO_USER_NAME | Documoto User Name | Required for Creates and Updates. User must have sufficient permissions assigned (via Roles) |
 
-*Note: the endpoints currently listed in the [WSDL](https://documoto.digabit.com/dws/services/PublishingService20?wsdl) are incorrect. They give a port (`8080`) and specify `http`.*
+*Note: the endpoints currently listed in the [WSDL](https://documoto.digabit.com/dws/services/PublishingService20?wsdl) are **incorrect**.
+They include a port (`8080`) and specify `http`.*
 
 ### Launch Profiles
 
