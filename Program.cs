@@ -37,6 +37,7 @@ namespace Documoto.Publishing.Client
             UploadFilesToBePublished(filePath);
 
             GetUploadedFilesList();
+            GetUploadedFilesList("machine-tool");
         }
 
         private static void FetchSuppliers()
@@ -260,12 +261,12 @@ namespace Documoto.Publishing.Client
                 throw new Exception($"UploadFilesToBePublished failed: status = {result.responseCode}, message = {result.responseMessage}");
         }
 
-        private static void GetUploadedFilesList()
+        private static void GetUploadedFilesList(string filenameFilter = null)
         {
             var request = new getUploadedFilesListRequest(new GetUploadedFilesListRequestDto
             {
                 tenantEncryptedKey = ApiKey,
-                
+                filenameFilter     = filenameFilter,
             });
 
             var response = Client.getUploadedFilesList(request);
