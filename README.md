@@ -28,4 +28,4 @@ The following modifications were made to the initially generated client code:
 - Added support for `https`
   - generated code did not include, because no `https` designation in published [Documoto WSDL](https://documoto.digabit.com/dws/services/PublishingService20?wsdl).
 - Include both synchronous and asynchronous operations
-- Removed explicit endpoints. Now must be provided via Configuration (see [above](##configuration)).
+- Removed explicit endpoints. Now must be provided via Configuration (see [above](#configuration)).
