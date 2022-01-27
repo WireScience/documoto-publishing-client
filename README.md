@@ -5,7 +5,7 @@ Example code, illustrating basic Documoto Publishing API operations.
 ## Configuration
 
 The following environment variables are required for execution:
- 
+
 |enviroment variable | description | notes |
 |--------------------|-------------|-------|
 | DOCUMOTO_API_ENDPOINT | Services endpoint | SOAP 1.1 or 1.2, `https` required |
@@ -24,8 +24,10 @@ Environment variables may be maintained therein, set on the machine, and/or prov
 ## Connected Service
 
 The following modifications were made to the initially generated client code:
+
 - Added the relevant `using` statements, cleaned up (removed) associated fully-qualified references
 - Added support for `https`
   - generated code did not include, because no `https` designation in published [Documoto WSDL](https://documoto.digabit.com/dws/services/PublishingService20?wsdl).
 - Include both synchronous and asynchronous operations
-- Removed explicit endpoints. Now must be provided via Configuration (see [above](#configuration)).
+- Removed explicit endpoints. Now must be provided via Configuration (see [above](#configuration))
+  
