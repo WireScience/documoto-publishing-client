@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 using Documoto.Services.Publishing;
 
-namespace SoapClient
+namespace Documoto.Publishing.Client
 {
     class Program
     {
@@ -26,12 +27,16 @@ namespace SoapClient
 
             const string testPart = "SS101";
             FetchSinglePart(testPart);
+            UpdateTagValue(testPart, RevisionLevelTag, "AA");
 
             FetchAllParts();
 
             CheckForDuplicateParts();
 
-            UpdateTagValue(testPart, RevisionLevelTag, "AA");
+            var filePath = Path.Combine(Environment.CurrentDirectory, "Assets", "machine-tool.png");
+            UploadFilesToBePublished(filePath);
+
+            GetUploadedFilesList();
         }
 
         private static void FetchSuppliers()
@@ -230,6 +235,45 @@ namespace SoapClient
             var result = response.@return[0];
             if (result.responseCode != 0)
                 throw new Exception($"UpdatePart failed: status = {result.responseCode}, message = {result.responseMessage}");
+        }
+
+        private static void UploadFilesToBePublished(string filePath)
+        {
+            var request = new uploadFileToBePublishedRequest(new UploadFileToBePublishedRequestDto[]
+            {
+                new()
+                {
+                    tenantEncryptedKey  = ApiKey,
+                    userName            = UserName,
+
+                    fileName            = Path.GetFileName(filePath),
+                    dataHandler         = File.ReadAllBytes(filePath).BinaryToBase64Binary(),
+
+                    submitForPublishing = false,
+                }
+            });
+
+            var response = Client.uploadFileToBePublished(request);
+
+            var result = response.@return[0];
+            if (result.responseCode != 0)
+                throw new Exception($"UploadFilesToBePublished failed: status = {result.responseCode}, message = {result.responseMessage}");
+        }
+
+        private static void GetUploadedFilesList()
+        {
+            var request = new getUploadedFilesListRequest(new GetUploadedFilesListRequestDto
+            {
+                tenantEncryptedKey = ApiKey,
+                
+            });
+
+            var response = Client.getUploadedFilesList(request);
+
+            var result = response.@return;
+            if (result.responseCode != 0)
+                throw new Exception($"GetUploadedFilesList failed: status = {result.responseCode}, message = {result.responseMessage}");
+
         }
 
     }
