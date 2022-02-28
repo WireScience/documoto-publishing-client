@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Media xmlns="http://digabit.com/documoto/media/1.4" xmlns:xs="http://www.w3.org/2001/XMLSchema" identifier="223704-A44" mediaType="Book" tenantKey="ELLIOTT">
+  <Translation description="" locale="en" name="RX-600e-4 Cold Planer Parts Manual "/>
+  <Translation description="" locale="fr" name="RX-600e-4 Manuel des pièces de la raboteuse à froid"/>
+  <Translation description="" locale="es" name="RX-600e-4 Manual de piezas de la cepilladora en frío"/>
+  <Tag name="Model" value="RX-600e-4"/>
+  <Tag name="Brand" value="Elliott Equiqment Co."/>
+  <Tag lowerBoundValue="4142" name="Serial Number" upperBoundValue="4142"/>
+  <Attachment fileName="Screen Shot 2021-01-18 at 10.05.13 AM.png" global="false" publicBelowOrg="false" type="THUMBNAIL" userName="ELLIOTTDemo">
+    <Comments>Screen Shot 2021-01-18 at 10.05.13 AM.png</Comments>
+  </Attachment>
+  <Chapter externalUri="" openInNewBrowserWindow="false" pageFile="">
+    <Translation description="" locale="es" name="SECCIÓN 1: MOTOR"/>
+    <Translation description="" locale="fr" name="SECTION 1 : MOTEUR"/>
+    <Translation description="" locale="en" name="SECTION 1: ENGINE"/>
+    <Page hashKey="cfaaaa54-da71-4294-90ad-6c3db7527723" pageFile="289684-01_Rev_0.svg">
+      <Translation description="" locale="en" name="ENGINE SYSTEM"/>
+    </Page>
+    <Page hashKey="e92de532-ce47-4432-9c11-85bfb7766bff" pageFile="272070-01_REV_B.svg">
+      <Translation description="" locale="en" name="PUMP SYSTEM"/>
+      <SecondaryPageFile displayOrder="1" fileName="272070-01_REV_B_1.svg"/>
+      <SecondaryPageFile displayOrder="2" fileName="272070-01_REV_B_2.svg"/>
+    </Page>
+    <Page hashKey="52f816ee-2e6d-4c26-8058-81ef6fa9adf5" pageFile="251904-01_REV_0.svg">
+      <Translation description="" locale="en" name="AIR FILTER"/>
+    </Page>
+  </Chapter>
+</Media>

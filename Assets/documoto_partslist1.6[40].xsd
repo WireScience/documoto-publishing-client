@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified"
+           targetNamespace="http://digabit.com/documoto/partslist/1.6"
+           xmlns="http://digabit.com/documoto/partslist/1.6"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Page" type="PageType"/>
+  <xs:complexType name="ProcessingInstructionsType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="updateOrReplacePartTags" use="optional"/>
+        <xs:attribute type="xs:string" name="updateOrReplacePageTags" use="optional"/>
+        <xs:attribute type="xs:string" name="updateOrReplaceMediaTags" use="optional"/>
+        <xs:attribute type="xs:string" name="addOrReplaceAttachments" use="optional"/>
+        <xs:attribute type="xs:string" name="updateOrReplaceAssemblyParts" use="optional"/>
+        <xs:attribute type="xs:string" name="updateOrReplaceHotpointLinks" use="optional"/>
+        <xs:attribute type="xs:string" name="updateOrReplaceOrgPartPricings" use="optional"/>
+        <xs:attribute type="xs:string" name="lockPartTranslations" use="optional"/>
+        <xs:attribute type="xs:string" name="doAutoHotpoint" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="TranslationType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="locale" use="required"/>
+        <xs:attribute type="xs:string" name="name" use="required"/>
+        <xs:attribute type="xs:string" name="description" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="TagType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="name" use="required"/>
+        <xs:attribute type="xs:string" name="value" use="optional"/>
+        <xs:attribute type="xs:boolean" name="isLocalToPage" use="optional"/>
+        <xs:attribute type="xs:integer" name="lowerBoundValue" use="optional"/>
+        <xs:attribute type="xs:integer" name="upperBoundValue" use="optional"/>
+        <xs:attribute type="xs:string" name="prefixValue" use="optional"/>
+        <xs:attribute type="xs:string" name="suffixValue" use="optional"/>      
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="HotpointLinkType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="item" use="required"/>
+        <xs:attribute name="type" use="required">
+          <xs:simpleType>
+            <xs:restriction base="xs:string">
+              <xs:enumeration value="Media" />
+              <xs:enumeration value="Page" />
+              <xs:enumeration value="Chapter" />
+            </xs:restriction>
+          </xs:simpleType>        
+        </xs:attribute>
+        <xs:attribute type="xs:string" name="targetIdentifier" use="optional"/>
+        <xs:attribute type="xs:string" name="locale" use="optional"/>
+        <xs:attribute type="xs:string" name="targetChapterName" use="optional"/>
+        <xs:attribute type="xs:string" name="targetPageName" use="optional"/>
+        <xs:attribute type="xs:string" name="targetPageFile" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="AttachmentType">
+    <xs:choice maxOccurs="unbounded" minOccurs="0">
+      <xs:element name="Comments" minOccurs="0" maxOccurs="1"/>
+      <xs:element type="AttachmentType" name="Attachment" maxOccurs="unbounded" minOccurs="0"/>
+      <xs:element type="TagType" name="Tag" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:choice>
+    <xs:attribute type="xs:string" name="global" use="optional"/>
+    <xs:attribute type="xs:string" name="publicBelowOrg" use="optional"/>
+    <xs:attribute type="xs:string" name="fileName" use="optional"/>
+    <xs:attribute type="xs:string" name="filePath" use="optional"/>
+    <xs:attribute type="xs:string" name="userName" use="optional"/>
+    <xs:attribute type="xs:string" name="type" use="optional"/>
+    <xs:attribute type="xs:string" name="subject" use="optional"/>
+  </xs:complexType>  
+  <xs:complexType name="KitType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="id" use="required"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="NetGeometryIdType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="id" use="required"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="PartType">
+    <xs:choice maxOccurs="unbounded" minOccurs="0">
+      <xs:element type="TranslationType" name="Translation" maxOccurs="unbounded" minOccurs="0"/>
+      <xs:element type="TagType" name="Tag" maxOccurs="unbounded" minOccurs="0"/>
+      <xs:element type="KitType" name="Kit" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element type="NetGeometryIdType" name="NetGeometryId" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element type="PartType" name="Part" maxOccurs="unbounded" minOccurs="0"/>
+      <xs:element type="AttachmentType" name="Attachment" maxOccurs="unbounded" minOccurs="0"/>      
+      <xs:element type="PricingType" name="Pricing" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:choice>
+    <xs:attribute type="xs:string" name="partNumber" use="required"/>
+    <xs:attribute type="xs:string" name="unitOfMeasure" use="optional"/>
+    <xs:attribute type="xs:float" name="wholesalePrice" use="optional"/>
+    <xs:attribute type="xs:float" name="retailPrice" use="optional"/>
+    <xs:attribute type="xs:float" name="discountedPrice" use="optional"/>
+    <xs:attribute type="xs:string" name="item" use="required"/>
+    <xs:attribute type="xs:string" name="quantity" use="required"/>
+    <xs:attribute type="xs:string" name="supplierKey" use="required"/>
+    <xs:attribute type="xs:integer" name="instanceId" use="optional"/>
+    <xs:attribute type="xs:string" name="orderable" use="optional"/>
+    <xs:attribute type="xs:string" name="partNumberVisible" use="optional"/>
+    <xs:attribute type="xs:string" name="partNumberVisibleForPage" use="optional"/>
+    <xs:attribute type="xs:string" name="orderableForPage" use="optional"/>
+  </xs:complexType>
+  <xs:complexType name="SecondaryPageFileType">
+  	<xs:attribute type="xs:string" name="fileName" use="required" />
+  	<xs:attribute type="xs:integer" name="displayOrder" use="required" />
+  </xs:complexType>
+  <xs:complexType name="PricingType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute type="xs:string" name="organizationName" use="required"/>
+        <xs:attribute type="xs:float" name="wholesalePrice" use="optional"/>
+        <xs:attribute type="xs:float" name="retailPrice" use="optional"/>
+        <xs:attribute type="xs:float" name="discountedPrice" use="optional"/>
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="AutoHotpointRequestType">
+    <xs:simpleContent>
+      <xs:extension base="xs:string">
+        <xs:attribute name="setWhiteBackground" type="xs:boolean" use="optional" />
+        <xs:attribute name="minThreshold" type="xs:int" use="optional" />
+        <xs:attribute name="maxThreshold" type="xs:int" use="optional" />
+        <xs:attribute name="thresholdStep" type="xs:int" use="optional" />
+        <xs:attribute name="minArea" type="xs:int" use="optional" />
+        <xs:attribute name="maxArea" type="xs:int" use="optional" />
+        <xs:attribute name="minDistBetweenBlobs" type="xs:int" use="optional" />
+        <xs:attribute name="minOcrConfidence" type="xs:int" use="optional" />
+      </xs:extension>
+    </xs:simpleContent>
+  </xs:complexType>
+  <xs:complexType name="DitaTopicContentReference">
+  <xs:simpleContent>
+    <xs:extension base="xs:string">
+      <xs:attribute type="xs:string" name="ditaTopicId" use="required"/>
+      <xs:attribute type="xs:integer" name="displayOrder" use="required"/>
+    </xs:extension>
+  </xs:simpleContent>
+</xs:complexType>
+  <xs:complexType name="PageType">
+    <xs:choice maxOccurs="unbounded" minOccurs="0">
+      <xs:element type="TranslationType" name="Translation" maxOccurs="unbounded" minOccurs="1"/>
+      <xs:element type="TagType" name="Tag" maxOccurs="unbounded" minOccurs="0"/>
+      <xs:element type="AttachmentType" name="Attachment" maxOccurs="unbounded" minOccurs="0"/>      
+      <xs:element type="PartType" name="Part" maxOccurs="unbounded" minOccurs="0"/>
+      <xs:element type="HotpointLinkType" name="HotpointLink" maxOccurs="unbounded" minOccurs="0"/>
+      <xs:element type="ProcessingInstructionsType" name="ProcessingInstructions" maxOccurs="1" minOccurs="0"/>
+      <xs:element type="SecondaryPageFileType" name="SecondaryPageFile" maxOccurs="unbounded" minOccurs="0"/>
+      <xs:element type="AutoHotpointRequestType" name="AutoHotpointRequest" maxOccurs="1" minOccurs="0"/>
+      <xs:element type="DitaTopicContentReference" name="PageContentDitaTopic" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:choice>
+    <xs:attribute type="xs:string" name="tenantKey" use="required"/>
+    <xs:attribute type="xs:string" name="pageFile" use="optional"/>
+    <xs:attribute type="xs:string" name="pageKey" use="optional"/>
+    <xs:attribute type="xs:string" name="externalUri" use="optional"/>
+    <xs:attribute type="xs:string" name="openInNewBrowserWindow" use="optional" />
+    <xs:attribute type="xs:string" name="hashKey" use="optional" />
+    <xs:attribute type="xs:boolean" name="excludeFromPrinting" use="optional" />
+  </xs:complexType>  
+</xs:schema>
