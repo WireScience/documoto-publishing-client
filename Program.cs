@@ -23,6 +23,8 @@ namespace Documoto.Publishing.Client
 
         static void Main()
         {
+            GetJobStatus("{tenantKey}-{userName}.{uniqueId}");
+
             FetchSuppliers();
 
             const string testPart = "SS101";
@@ -38,6 +40,27 @@ namespace Documoto.Publishing.Client
 
             GetUploadedFilesList();
             GetUploadedFilesList("machine-tool");
+        }
+
+        private static void GetJobStatus(string jobId)
+        {
+            var request = new getJobStatusRequest(new GetJobStatusRequestDto[]
+            {
+                new()
+                {
+                    tenantEncryptedKey = ApiKey,
+                    jobId = jobId,
+                }
+            });
+
+            var response = Client.getJobStatus(request);
+
+            var result = response.@return[0];
+            if (result.responseCode != 0)
+                throw new Exception($"GetJobStatus failed: status = {result.responseCode}, message = {result.responseMessage}");
+
+            Console.WriteLine($"JobId: {jobId}, Status: {result.jobStatus}");
+            Console.WriteLine($"Messages: {result.jobMessages}");
         }
 
         private static void FetchSuppliers()
